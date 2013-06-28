@@ -200,7 +200,8 @@ module Compass::SassExtensions::Functions::Urls
       clean_path(path)
     end
     def generated_image_url(path, cache_buster = Sass::Script::Bool.new(false))
-      clean_url(generated_image_path(path, cache_buster))
+      path = generated_image_path(path, cache_buster)
+      clean_url(path)
     end
   end
 
