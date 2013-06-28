@@ -117,12 +117,19 @@ module Compass::SassExtensions::Functions::Sprites
 
 
   # Returns a url to the sprite image.
-  def sprite_url(map)
+  def sprite_url(map, only_path = Sass::Script::Bool.new(false))
     verify_map(map, "sprite-url")
     map.generate
-    generated_image_url(Sass::Script::String.new("#{map.path}-s#{map.uniqueness_hash}.png"))
+
+    path = Sass::Script::String.new("#{map.path}-s#{map.uniqueness_hash}.png")
+    if only_path.to_bool
+      path
+    else
+      generated_image_url(path)
+    end
   end
   Sass::Script::Functions.declare :sprite_url, [:map]
+  Sass::Script::Functions.declare :sprite_url, [:map, :only_path]
 
   # Returns the position for the original image in the sprite.
   # This is suitable for use as a value to background-position:
