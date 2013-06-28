@@ -123,7 +123,7 @@ module Compass::SassExtensions::Functions::Sprites
 
     path = Sass::Script::String.new("#{map.path}-s#{map.uniqueness_hash}.png")
     if only_path.to_bool
-      path
+      generated_image_path(path)
     else
       generated_image_url(path)
     end

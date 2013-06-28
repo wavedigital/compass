@@ -145,7 +145,7 @@ module Compass::SassExtensions::Functions::Urls
         base.declare :generated_image_url, [:path, :cache_buster]
       end
     end
-    def generated_image_url(path, cache_buster = Sass::Script::Bool.new(false))
+    def generated_image_path(path, cache_buster = Sass::Script::Bool.new(false))
       path = path.value # get to the string value of the literal.
 
       if path =~ %r{^#{Regexp.escape(Compass.configuration.http_generated_images_path)}/(.*)}
@@ -154,7 +154,7 @@ module Compass::SassExtensions::Functions::Urls
         path = $1
       elsif absolute_path?(path)
         # Short curcuit if they have provided an absolute url.
-        return Sass::Script::String.new("url(#{path})")
+        return clean_path(path)
       end
 
       # Compute the path to the image, either root relative or stylesheet relative
@@ -195,7 +195,10 @@ module Compass::SassExtensions::Functions::Urls
       # prepend the asset host if there is one.
       path = "#{asset_host}#{'/' unless path[0..0] == "/"}#{path}" if asset_host
 
-      clean_url(path)
+      clean_path(path)
+    end
+    def generated_image_url(path, cache_buster = Sass::Script::Bool.new(false))
+      clean_url(generated_image_path(path, cache_buster))
     end
   end
 
