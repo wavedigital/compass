@@ -107,10 +107,13 @@ documented_functions:
 #sprite-url.helper
   %h3
     %a(href="#sprite-url")
-      sprite-url(<span class="arg">$map</span>)
+      sprite-url(<span class="arg">$map</span>, <span class="arg" data-default-value="false" title="Defaults to: false">$only-path</span>)
   .details
-    :markdown
+    %p
       Returns a url to the sprite image.
+    %p
+      Passing a true value as the second argument will cause only the path to be returned
+      instead of a <code>url()</code> function
 
 #sprite-position.helper
   %h3
