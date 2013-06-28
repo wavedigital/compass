@@ -143,6 +143,8 @@ module Compass::SassExtensions::Functions::Urls
       if base.respond_to?(:declare)
         base.declare :generated_image_url, [:path]
         base.declare :generated_image_url, [:path, :cache_buster]
+        base.declare :generated_image_path, [:path, :cache_buster]
+        base.declare :generated_image_path, [:path, :cache_buster]
       end
     end
     def generated_image_path(path, cache_buster = Sass::Script::Bool.new(false))
